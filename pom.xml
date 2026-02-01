@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.erica.fintech</groupId>
-	<artifactId>MicroMpesaplusAirtimePlatform</artifactId>
+	<artifactId>MobileMoneyPlatform</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MicroMpesaplusAirtimePlatform</name>
+	<name>MobileMoneyPlatform</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>

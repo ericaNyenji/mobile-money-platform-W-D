@@ -7,13 +7,13 @@ WORKDIR /app
 
 # Copy pom.xml first (for dependency caching)
 COPY pom.xml .
-RUN mvn dependency:go-offline
+#RUN mvn -B dependency:go-offline
 
 # Copy source code
 COPY src ./src
 
 # Build the application
-RUN mvn clean package -DskipTests
+RUN mvn -B clean package -DskipTests
 
 
 # ===============================
@@ -23,6 +23,9 @@ FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 
+# JVM container optimizations
+ENV JAVA_OPTS="-XX:MaxRAMPercentage=75.0"
+
 # Copy the built JAR from build stage
 COPY --from=build /app/target/*.jar app.jar
 
@@ -30,4 +33,4 @@ COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 
 # Run the app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

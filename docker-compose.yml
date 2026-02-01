@@ -3,30 +3,28 @@ version: "3.9"
 services:
   mysql:
     image: mysql:8.0
-    container_name: micrompesa-mysql
-    restart: always
+    container_name: mobile-money-mysql
     environment:
-      MYSQL_DATABASE: micrompesa
-      MYSQL_USER: micrompesa_user
-      MYSQL_PASSWORD: micrompesa_pass
-      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: mobile_money
+      MYSQL_USER: mobile
+      MYSQL_PASSWORD: mobile123
+      MYSQL_ROOT_PASSWORD: root123
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 
   app:
-    image: micrompesa
-    container_name: micrompesa-app
-    depends_on:
-      - mysql
+    build: .
+    container_name: mobile-money-app
     ports:
       - "8080:8080"
+    depends_on:
+      - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/micrompesa
-      SPRING_DATASOURCE_USERNAME: micrompesa_user
-      SPRING_DATASOURCE_PASSWORD: micrompesa_pass
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mobile_money
+      SPRING_DATASOURCE_USERNAME: mobile
+      SPRING_DATASOURCE_PASSWORD: mobile123
 
 volumes:
   mysql_data:
